@@ -5,6 +5,8 @@ from pydantic import BaseModel, Field
 from typing import List, Optional, Dict
 from datetime import datetime, timedelta
 from jose import JWTError, jwt
+from fastapi import Body
+from passlib.context import CryptContext
 
 # === APP METADATA ===
 app = FastAPI(
@@ -48,6 +50,9 @@ fake_tasks_db: Dict[int, dict] = {}
 fake_categories_db = {"Work": 1, "Personal": 2}
 task_id_counter = 1
 
+# Password hashing context
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
 # === AUTHENTICATION SETTINGS ===
 SECRET_KEY = "supersecretkey_for_dev_only"  # in production use env + secrets
 ALGORITHM = "HS256"
@@ -56,6 +61,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 60
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/token")
 
 # === SCHEMAS ===
+
 
 class Token(BaseModel):
     access_token: str = Field(..., description="JWT access token")
@@ -74,6 +80,29 @@ class User(BaseModel):
 
 class UserInDB(User):
     hashed_password: str
+
+
+# === SCHEMA FOR REGISTRATION ===
+
+
+class UserRegister(BaseModel):
+    username: str = Field(
+        ...,
+        min_length=3,
+        max_length=32,
+        description="Username for the new account"
+    )
+    password: str = Field(
+        ...,
+        min_length=6,
+        max_length=128,
+        description="Password for the new account"
+    )
+
+
+class UserRegisterResponse(BaseModel):
+    message: str = Field(..., description="Success message")
+    username: str = Field(..., description="Registered username")
 
 
 class Category(BaseModel):
@@ -122,6 +151,7 @@ class Task(TaskBase):
 
 # === AUTHENTICATION UTILS ===
 
+
 # PUBLIC_INTERFACE
 def fake_hash_password(password: str) -> str:
     """Fake password hashing for demonstration purposes."""
@@ -129,9 +159,17 @@ def fake_hash_password(password: str) -> str:
 
 
 # PUBLIC_INTERFACE
+def get_password_hash(password: str) -> str:
+    """Hashes password using passlib's CryptContext."""
+    return pwd_context.hash(password)
+
+
+# PUBLIC_INTERFACE
 def verify_password(plain_password: str, hashed_password: str) -> bool:
-    """Verifies a plain password against the hashed fake password."""
-    return fake_hash_password(plain_password) == hashed_password
+    """Verifies a plain password against the hashed fake password or bcrypt hash."""
+    if hashed_password.startswith("fakehashed_"):
+        return fake_hash_password(plain_password) == hashed_password
+    return pwd_context.verify(plain_password, hashed_password)
 
 
 # PUBLIC_INTERFACE
@@ -195,6 +233,49 @@ async def get_active_user(current_user: User = Depends(get_current_user)):
 
 # === AUTH ENDPOINTS ===
 
+
+@app.post(
+    "/register",
+    tags=["auth"],
+    response_model=UserRegisterResponse,
+    summary="Register a new user",
+    status_code=201,
+    responses={
+        201: {"description": "User registered successfully", "model": UserRegisterResponse},
+        400: {"description": "Invalid username or password / Username already exists"},
+    }
+)
+# PUBLIC_INTERFACE
+async def register_user(
+    user_req: UserRegister = Body(..., description="New user's registration data"),
+):
+    """
+    Registers a new user with username and password.
+
+    - username: desired username (unique)
+    - password: desired password (min 6 chars, will be hashed)
+    """
+    username = user_req.username.strip().lower()
+    if not username or len(username) < 3:
+        raise HTTPException(status_code=400, detail="Username too short (minimum 3 chars).")
+    if username in fake_users_db:
+        raise HTTPException(status_code=400, detail="Username already exists.")
+    if not user_req.password or len(user_req.password) < 6:
+        raise HTTPException(status_code=400, detail="Password too short (minimum 6 chars).")
+    # Store the user with hashed password. Use bcrypt (passlib) hashing.
+    user_db_record = {
+        "username": username,
+        "full_name": username,
+        "hashed_password": get_password_hash(user_req.password),
+        "disabled": False,
+    }
+    fake_users_db[username] = user_db_record
+    return UserRegisterResponse(
+        message="User registered successfully.",
+        username=username
+    )
+
+
 @app.post("/auth/token", tags=["auth"], response_model=Token, summary="User login")
 # PUBLIC_INTERFACE
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
@@ -226,6 +307,7 @@ async def read_users_me(current_user: User = Depends(get_active_user)):
 
 # === CATEGORY ENDPOINT ===
 
+
 @app.get(
     "/categories",
     tags=["tasks"],
@@ -241,6 +323,7 @@ async def list_categories(current_user: User = Depends(get_active_user)):
 
 
 # === TASK ENDPOINTS ===
+
 
 @app.post(
     "/tasks",
@@ -368,6 +451,7 @@ async def delete_task(task_id: int, current_user: User = Depends(get_active_user
 
 
 # === HEALTH CHECK ===
+
 
 @app.get("/", tags=["health"])
 # PUBLIC_INTERFACE

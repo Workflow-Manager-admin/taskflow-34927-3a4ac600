@@ -36,3 +36,10 @@ INFO:     100.64.39.19:59978 - "HEAD /docs HTTP/1.1" 200 OK
 INFO:     100.64.39.19:59992 - "HEAD /docs HTTP/1.1" 200 OK
 INFO:     100.64.39.19:59998 - "HEAD /docs HTTP/1.1" 200 OK
 INFO:     100.64.39.19:60010 - "HEAD /docs HTTP/1.1" 200 OK
+INFO:     100.64.39.19:57036 - "OPTIONS /auth/register HTTP/1.1" 200 OK
+INFO:     100.64.39.19:57038 - "POST /auth/register HTTP/1.1" 404 Not Found
+INFO:     100.64.39.19:47450 - "GET /auth/register HTTP/1.1" 404 Not Found
+INFO:     100.64.39.19:47454 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     100.64.39.19:58648 - "OPTIONS /auth/login HTTP/1.1" 200 OK
+INFO:     100.64.39.19:58660 - "POST /auth/login HTTP/1.1" 404 Not Found
+INFO:     100.64.39.19:36940 - "GET /auth/login HTTP/1.1" 404 Not Found

@@ -35,18 +35,25 @@ async function apiRequest(endpoint, { method = "GET", data, auth = false } = {})
   return json;
 }
 
-// PUBLIC_INTERFACE
+/**
+ * PUBLIC_INTERFACE
+ * Log in a user. POST to /login.
+ */
 export async function loginUser(username, password) {
-  // FastAPI: typically POST /login or /token
-  return apiRequest("/auth/login", {
+  // FastAPI backend expects POST /login
+  return apiRequest("/login", {
     method: "POST",
     data: { username, password },
   });
 }
 
-// PUBLIC_INTERFACE
+/**
+ * PUBLIC_INTERFACE
+ * Register a user. POST to /register.
+ */
 export async function registerUser(username, password) {
-  return apiRequest("/auth/register", {
+  // FastAPI backend expects POST /register
+  return apiRequest("/register", {
     method: "POST",
     data: { username, password },
   });

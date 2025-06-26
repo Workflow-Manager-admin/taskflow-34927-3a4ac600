@@ -10,41 +10,54 @@ import React from "react";
  */
 function TaskList({ tasks, onEdit, onDelete }) {
   // Status color classes
-  const statusClass = (status) =>
-    status === "done"
-      ? "status-pill done"
-      : status === "in_progress"
-      ? "status-pill inprogress"
-      : "status-pill todo";
+  // Accepts backend status as "TODO", "IN_PROGRESS", "DONE" → maps for CSS and user display
+  const statusClass = (status) => {
+    const s = (status || "").toLowerCase();
+    if (s === "done") return "status-pill done";
+    if (s === "in_progress" || s === "in progress" || s === "inprogress")
+      return "status-pill inprogress";
+    return "status-pill todo";
+  };
 
   return (
     <table className="task-list-table">
       <thead>
         <tr>
-          <th>Name</th>
+          <th>Title</th>
           <th>Description</th>
           <th>Status</th>
           <th>Category</th>
-          <th style={{width:'110px'}}>Actions</th>
+          <th style={{ width: "110px" }}>Actions</th>
         </tr>
       </thead>
       <tbody>
         {tasks.map((t) => (
           <tr key={t.id}>
-            <td>{t.name}</td>
+            <td>{t.title ?? t.name}</td>
             <td>{t.description}</td>
             <td>
               <span className={statusClass(t.status)}>
-                {t.status.replace("_", " ").toUpperCase()}
+                {/* Show status as pretty string, e.g. "IN_PROGRESS" → "IN PROGRESS" */}
+                {String(t.status || "")
+                  .replace(/_/g, " ")
+                  .toUpperCase()}
               </span>
             </td>
             <td>{t.category}</td>
             <td>
               <div className="action-btn-group">
-                <button className="action-btn edit" onClick={() => onEdit(t)} title="Edit">
+                <button
+                  className="action-btn edit"
+                  onClick={() => onEdit(t)}
+                  title="Edit"
+                >
                   ✎
                 </button>
-                <button className="action-btn delete" onClick={() => onDelete(t)} title="Delete">
+                <button
+                  className="action-btn delete"
+                  onClick={() => onDelete(t)}
+                  title="Delete"
+                >
                   🗑
                 </button>
               </div>

@@ -5,27 +5,41 @@ import React, { useState } from "react";
  * Task Form for Add/Edit task modal.
  * Props:
  * - onSubmit: function(taskObj)
- * - initial: initial values {name, description, status, category}
+ * - initial: initial values {title, description, status, category, due_date}
  * - categories: Array<string>
  * - loading: boolean
  * - mode: "add" | "edit"
  */
 function TaskForm({ onSubmit, initial = {}, categories, loading, mode }) {
-  const [name, setName] = useState(initial.name || "");
+  // Map both "name" and "title" from props for back/forward compatibility
+  const [title, setTitle] = useState(initial.title || initial.name || "");
   const [description, setDescription] = useState(initial.description || "");
-  const [status, setStatus] = useState(initial.status || "todo");
+  // Status input is frontend string: "todo", "in_progress", "done"
+  const [status, setStatus] = useState(
+    (initial.status || "todo").toLowerCase()
+  );
   const [category, setCategory] = useState(initial.category || "");
+  const [dueDate, setDueDate] = useState(initial.due_date || "");
   const [error, setError] = useState("");
 
   // PUBLIC_INTERFACE
   function handleSubmit(e) {
     e.preventDefault();
-    if (!name.trim() || !status) {
-      setError("Task name and status are required");
+    if (!title.trim() || !status) {
+      setError("Task title and status are required");
       return;
     }
     setError("");
-    onSubmit({ name, description, status, category });
+    // Pass name as alias for legacy, real backend uses title.
+    const payload = {
+      name: title,
+      title: title,
+      description,
+      status,
+      category,
+    };
+    if (dueDate) payload.due_date = dueDate;
+    onSubmit(payload);
   }
 
   return (
@@ -34,10 +48,10 @@ function TaskForm({ onSubmit, initial = {}, categories, loading, mode }) {
         <div style={{ color: "#e53935", marginBottom: 10 }}>{error}</div>
       )}
       <div className="form-group">
-        <label>Task Name</label>
+        <label>Task Title</label>
         <input
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
           maxLength={60}
           required
           disabled={loading}
@@ -80,6 +94,15 @@ function TaskForm({ onSubmit, initial = {}, categories, loading, mode }) {
             <option key={c}>{c}</option>
           ))}
         </datalist>
+      </div>
+      <div className="form-group">
+        <label>Due Date (optional)</label>
+        <input
+          type="date"
+          value={dueDate}
+          onChange={(e) => setDueDate(e.target.value)}
+          disabled={loading}
+        />
       </div>
       <div className="modal-actions">
         <button className="btn btn-primary" type="submit" disabled={loading}>

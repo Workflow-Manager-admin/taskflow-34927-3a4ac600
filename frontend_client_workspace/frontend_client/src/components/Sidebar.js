@@ -4,7 +4,7 @@ import React from "react";
  * PUBLIC_INTERFACE
  * App sidebar for categories.
  * Props:
- * - categories: Array<string>
+ * - categories: Array<string> (names only, mapped by api.js)
  * - selected: category string or null
  * - onSelect: function(category)
  */

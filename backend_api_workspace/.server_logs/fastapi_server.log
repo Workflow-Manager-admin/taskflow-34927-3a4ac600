@@ -43,3 +43,5 @@ INFO:     100.64.39.19:47454 - "GET /favicon.ico HTTP/1.1" 404 Not Found
 INFO:     100.64.39.19:58648 - "OPTIONS /auth/login HTTP/1.1" 200 OK
 INFO:     100.64.39.19:58660 - "POST /auth/login HTTP/1.1" 404 Not Found
 INFO:     100.64.39.19:36940 - "GET /auth/login HTTP/1.1" 404 Not Found
+INFO:     100.64.39.19:53576 - "OPTIONS /login HTTP/1.1" 200 OK
+INFO:     100.64.39.19:53578 - "POST /login HTTP/1.1" 404 Not Found

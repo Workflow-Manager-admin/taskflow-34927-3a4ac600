@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
+from sqlalchemy import text
 from typing import List, Optional
 from datetime import datetime, timedelta
 from jose import JWTError, jwt
@@ -531,7 +532,7 @@ def db_health_check(db: Session = Depends(get_db)):
       or {"db_connection": "error", "detail": <error>} if not.
     """
     try:
-        db.execute("SELECT 1")
+        db.execute(text("SELECT 1"))
         return {"db_connection": "ok"}
     except Exception as e:
         return {"db_connection": "error", "detail": str(e)}

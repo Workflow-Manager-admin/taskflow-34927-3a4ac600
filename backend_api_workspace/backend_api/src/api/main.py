@@ -510,6 +510,33 @@ def health_check():
     return {"message": "Healthy"}
 
 
+@app.get(
+    "/health/db",
+    tags=["health"],
+    summary="Check database connectivity",
+    response_model=dict,
+    responses={
+        200: {"description": "Database connection is healthy"},
+        503: {"description": "Failed to connect to the database"},
+    },
+)
+# PUBLIC_INTERFACE
+def db_health_check(db: Session = Depends(get_db)):
+    """
+    Health check endpoint for the SQLite database connection.
+
+    Attempts a simple query ('SELECT 1') using a SQLAlchemy session.
+
+    - Returns: {"db_connection": "ok"} if successful,
+      or {"db_connection": "error", "detail": <error>} if not.
+    """
+    try:
+        db.execute("SELECT 1")
+        return {"db_connection": "ok"}
+    except Exception as e:
+        return {"db_connection": "error", "detail": str(e)}
+
+
 # === FIRST LAUNCH DB SEED: default categories ===
 
 

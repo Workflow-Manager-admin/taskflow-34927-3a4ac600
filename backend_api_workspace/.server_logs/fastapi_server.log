@@ -1,96 +1,21 @@
 /home/kavia/workspace/code-generation/taskflow-34927-3a4ac600/backend_api_workspace/backend_api/venv/lib/python3.12/site-packages/pydantic/_internal/_config.py:373: UserWarning: Valid config keys have changed in V2:
 * 'orm_mode' has been renamed to 'from_attributes'
   warnings.warn(message, UserWarning)
-INFO:     Started server process [4664]
+INFO:     Started server process [18409]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:3001 (Press CTRL+C to quit)
-INFO:     100.64.39.19:44106 - "GET /docs HTTP/1.1" 200 OK
-INFO:     100.64.39.19:45298 - "GET /docs HTTP/1.1" 200 OK
-INFO:     100.64.39.19:45300 - "GET /openapi.json HTTP/1.1" 200 OK
 (trapped) error reading bcrypt version
 Traceback (most recent call last):
   File "/home/kavia/workspace/code-generation/taskflow-34927-3a4ac600/backend_api_workspace/backend_api/venv/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
     version = _bcrypt.__about__.__version__
               ^^^^^^^^^^^^^^^^^
 AttributeError: module 'bcrypt' has no attribute '__about__'
-INFO:     100.64.39.19:40474 - "POST /register HTTP/1.1" 201 Created
-INFO:     100.64.39.19:57112 - "POST /auth/token HTTP/1.1" 200 OK
-INFO:     100.64.39.19:40208 - "POST /auth/token HTTP/1.1" 200 OK
-INFO:     100.64.39.19:51394 - "POST /tasks HTTP/1.1" 201 Created
-INFO:     100.64.39.19:56766 - "GET /tasks HTTP/1.1" 200 OK
-INFO:     100.64.39.19:40264 - "DELETE /tasks/1 HTTP/1.1" 200 OK
-INFO:     100.64.39.19:51636 - "HEAD /docs HTTP/1.1" 200 OK
-INFO:     100.64.39.19:51644 - "HEAD /docs HTTP/1.1" 200 OK
-INFO:     100.64.39.19:51648 - "HEAD /docs HTTP/1.1" 200 OK
-INFO:     100.64.39.19:51652 - "HEAD /docs HTTP/1.1" 200 OK
-INFO:     100.64.39.19:51668 - "HEAD /docs HTTP/1.1" 200 OK
-INFO:     100.64.39.19:51680 - "HEAD /docs HTTP/1.1" 200 OK
-INFO:     100.64.39.19:51686 - "GET /docs HTTP/1.1" 200 OK
-INFO:     100.64.39.19:51696 - "GET /docs HTTP/1.1" 200 OK
-INFO:     100.64.39.19:51712 - "GET /openapi.json HTTP/1.1" 200 OK
-INFO:     100.64.39.19:51720 - "GET /openapi.json HTTP/1.1" 200 OK
-INFO:     100.64.39.19:59962 - "HEAD /docs HTTP/1.1" 200 OK
-INFO:     100.64.39.19:59964 - "HEAD /docs HTTP/1.1" 200 OK
-INFO:     100.64.39.19:59978 - "HEAD /docs HTTP/1.1" 200 OK
-INFO:     100.64.39.19:59992 - "HEAD /docs HTTP/1.1" 200 OK
-INFO:     100.64.39.19:59998 - "HEAD /docs HTTP/1.1" 200 OK
-INFO:     100.64.39.19:60010 - "HEAD /docs HTTP/1.1" 200 OK
-INFO:     100.64.39.19:57036 - "OPTIONS /auth/register HTTP/1.1" 200 OK
-INFO:     100.64.39.19:57038 - "POST /auth/register HTTP/1.1" 404 Not Found
-INFO:     100.64.39.19:47450 - "GET /auth/register HTTP/1.1" 404 Not Found
-INFO:     100.64.39.19:47454 - "GET /favicon.ico HTTP/1.1" 404 Not Found
-INFO:     100.64.39.19:58648 - "OPTIONS /auth/login HTTP/1.1" 200 OK
-INFO:     100.64.39.19:58660 - "POST /auth/login HTTP/1.1" 404 Not Found
-INFO:     100.64.39.19:36940 - "GET /auth/login HTTP/1.1" 404 Not Found
-INFO:     100.64.39.19:53576 - "OPTIONS /login HTTP/1.1" 200 OK
-INFO:     100.64.39.19:53578 - "POST /login HTTP/1.1" 404 Not Found
-INFO:     100.64.39.19:34046 - "POST /login HTTP/1.1" 404 Not Found
-INFO:     100.64.39.19:39054 - "POST /login HTTP/1.1" 404 Not Found
-INFO:     100.64.39.19:60434 - "POST /auth/token HTTP/1.1" 200 OK
-INFO:     100.64.39.19:60444 - "OPTIONS /auth/me HTTP/1.1" 200 OK
-INFO:     100.64.39.19:60448 - "GET /auth/me HTTP/1.1" 200 OK
-INFO:     100.64.39.19:60464 - "OPTIONS /tasks HTTP/1.1" 200 OK
-INFO:     100.64.39.19:60474 - "OPTIONS /categories HTTP/1.1" 200 OK
-INFO:     100.64.39.19:60480 - "GET /categories HTTP/1.1" 200 OK
-INFO:     100.64.39.19:60494 - "GET /tasks HTTP/1.1" 200 OK
-INFO:     100.64.39.19:53196 - "OPTIONS /tasks?category=Work HTTP/1.1" 200 OK
-INFO:     100.64.39.19:53198 - "GET /categories HTTP/1.1" 200 OK
-INFO:     100.64.39.19:53200 - "OPTIONS /tasks?category=Personal HTTP/1.1" 200 OK
-INFO:     100.64.39.19:53218 - "GET /categories HTTP/1.1" 200 OK
-INFO:     100.64.39.19:53212 - "GET /tasks?category=Work HTTP/1.1" 200 OK
-INFO:     100.64.39.19:53232 - "GET /tasks?category=Personal HTTP/1.1" 200 OK
-INFO:     100.64.39.19:53244 - "GET /tasks HTTP/1.1" 200 OK
-INFO:     100.64.39.19:53260 - "GET /categories HTTP/1.1" 200 OK
-INFO:     100.64.39.19:58318 - "POST /tasks HTTP/1.1" 201 Created
-INFO:     100.64.39.19:58324 - "GET /tasks HTTP/1.1" 200 OK
-INFO:     100.64.39.19:58338 - "GET /categories HTTP/1.1" 200 OK
-INFO:     100.64.39.19:50042 - "OPTIONS /tasks/2 HTTP/1.1" 200 OK
-INFO:     100.64.39.19:50058 - "PUT /tasks/2 HTTP/1.1" 200 OK
-INFO:     100.64.39.19:50070 - "GET /categories HTTP/1.1" 200 OK
-INFO:     100.64.39.19:50062 - "GET /tasks HTTP/1.1" 200 OK
-INFO:     100.64.39.19:53022 - "DELETE /tasks/2 HTTP/1.1" 200 OK
-INFO:     100.64.39.19:53038 - "GET /tasks HTTP/1.1" 200 OK
-INFO:     100.64.39.19:53048 - "GET /categories HTTP/1.1" 200 OK
-INFO:     100.64.39.19:53058 - "GET /tasks?category=Work HTTP/1.1" 200 OK
-INFO:     100.64.39.19:53068 - "GET /categories HTTP/1.1" 200 OK
-INFO:     100.64.39.19:53076 - "GET /tasks?category=Personal HTTP/1.1" 200 OK
-INFO:     100.64.39.19:53082 - "GET /categories HTTP/1.1" 200 OK
-INFO:     100.64.39.19:53098 - "GET /tasks HTTP/1.1" 200 OK
-INFO:     100.64.39.19:53112 - "GET /categories HTTP/1.1" 200 OK
-INFO:     100.64.39.19:47046 - "POST /tasks HTTP/1.1" 201 Created
-INFO:     100.64.39.19:47048 - "GET /tasks HTTP/1.1" 200 OK
-INFO:     100.64.39.19:47056 - "GET /categories HTTP/1.1" 200 OK
-INFO:     100.64.39.19:47072 - "GET /tasks?category=Work HTTP/1.1" 200 OK
-INFO:     100.64.39.19:47078 - "GET /categories HTTP/1.1" 200 OK
-INFO:     100.64.39.19:47094 - "GET /tasks?category=Personal HTTP/1.1" 200 OK
-INFO:     100.64.39.19:47100 - "GET /categories HTTP/1.1" 200 OK
-INFO:     100.64.39.19:45650 - "GET /tasks HTTP/1.1" 200 OK
-INFO:     100.64.39.19:45658 - "GET /categories HTTP/1.1" 200 OK
-INFO:     100.64.39.19:33606 - "OPTIONS /register HTTP/1.1" 200 OK
-INFO:     100.64.39.19:33610 - "POST /register HTTP/1.1" 201 Created
-INFO:     100.64.39.19:33624 - "POST /auth/token HTTP/1.1" 200 OK
-INFO:     100.64.39.19:33638 - "GET /auth/me HTTP/1.1" 200 OK
-INFO:     100.64.39.19:33644 - "GET /tasks HTTP/1.1" 200 OK
-INFO:     100.64.39.19:33656 - "GET /categories HTTP/1.1" 200 OK
-INFO:     100.64.39.19:43812 - "POST /auth/token HTTP/1.1" 401 Unauthorized
+INFO:     100.64.39.19:45462 - "POST /register HTTP/1.1" 201 Created
+INFO:     100.64.39.19:45476 - "POST /auth/token HTTP/1.1" 200 OK
+INFO:     100.64.39.19:45488 - "GET /auth/me HTTP/1.1" 200 OK
+INFO:     100.64.39.19:45494 - "GET /categories HTTP/1.1" 200 OK
+INFO:     100.64.39.19:45504 - "GET /tasks HTTP/1.1" 200 OK
+INFO:     100.64.39.19:48182 - "POST /tasks HTTP/1.1" 201 Created
+INFO:     100.64.39.19:48198 - "GET /categories HTTP/1.1" 200 OK
+INFO:     100.64.39.19:48184 - "GET /tasks HTTP/1.1" 200 OK

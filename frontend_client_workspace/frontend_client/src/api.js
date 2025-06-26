@@ -1,8 +1,8 @@
 //
-// API utility file for communicating with FastAPI backend at http://localhost:8000
-//
+ // API utility file for communicating with FastAPI backend at https://vscode-internal-57-qa.qa01.cloud.kavia.ai:3001
+ //
 
-const API_BASE_URL = "http://localhost:8000";
+const API_BASE_URL = "https://vscode-internal-57-qa.qa01.cloud.kavia.ai:3001";
 
 /** Helper to get the token from localStorage */
 export function getAuthToken() {

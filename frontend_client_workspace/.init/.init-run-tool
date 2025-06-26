@@ -1,0 +1,4 @@
+{
+    "command": "PORT=<port> HOST=<host> BROWSER=none npm start",
+    "working_directory": "/home/kavia/workspace/code-generation/taskflow-34927-3a4ac600/frontend_client_workspace/frontend_client"
+}
